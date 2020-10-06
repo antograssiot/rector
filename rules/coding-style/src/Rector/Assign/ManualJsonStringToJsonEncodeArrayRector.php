@@ -370,10 +370,6 @@ CODE_SAMPLE
         if (! $firstArgumentValue instanceof String_) {
             return true;
         }
-        if ($firstArgumentValue->value === '","') {
-            return true;
-        }
-
-        return false;
+        return $firstArgumentValue->value === '","';
     }
 }

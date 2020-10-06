@@ -253,7 +253,7 @@ CODE_SAMPLE
         if ($arrayFuncCallToMethodCall->getArrayMethod() && $this->isArrayType($funcCall->args[0]->value)) {
             return new MethodCall($propertyFetch, $arrayFuncCallToMethodCall->getArrayMethod(), $funcCall->args);
         }
-        if (! $arrayFuncCallToMethodCall->getNonArrayMethod()) {
+        if ($arrayFuncCallToMethodCall->getNonArrayMethod() === '') {
             return null;
         }
         if ($this->isArrayType($funcCall->args[0]->value)) {
