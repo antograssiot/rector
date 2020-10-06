@@ -251,17 +251,13 @@ CODE_SAMPLE
             return $this->propertyFetchManipulator->isLocalPropertyOfNames(
                 $expr->right,
                 $propertyNames
-            ) && $this->isNull(
-                $expr->left
-            );
+            ) && $this->isNull($expr->left);
         }
         if (! $this->isNull($expr->right)) {
             return $this->propertyFetchManipulator->isLocalPropertyOfNames(
                 $expr->right,
                 $propertyNames
-            ) && $this->isNull(
-                $expr->left
-            );
+            ) && $this->isNull($expr->left);
         }
         return true;
     }
