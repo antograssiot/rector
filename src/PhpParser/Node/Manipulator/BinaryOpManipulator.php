@@ -47,10 +47,10 @@ final class BinaryOpManipulator
         if ($firstCondition($binaryOp->left, $binaryOp->right) && $secondCondition($binaryOp->right, $binaryOp->left)) {
             return new TwoNodeMatch($binaryOp->left, $binaryOp->right);
         }
-        if (!$firstCondition($binaryOp->right, $binaryOp->left)) {
+        if (! $firstCondition($binaryOp->right, $binaryOp->left)) {
             return null;
         }
-        if (!$secondCondition($binaryOp->left, $binaryOp->right)) {
+        if (! $secondCondition($binaryOp->left, $binaryOp->right)) {
             return null;
         }
 

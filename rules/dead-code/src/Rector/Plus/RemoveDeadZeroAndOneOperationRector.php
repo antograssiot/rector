@@ -159,10 +159,10 @@ CODE_SAMPLE
             }
             return $binaryOp->right;
         }
-        if (!$this->isValue($binaryOp->right, 0)) {
+        if (! $this->isValue($binaryOp->right, 0)) {
             return null;
         }
-        if (!$this->isNumberType($binaryOp->left)) {
+        if (! $this->isNumberType($binaryOp->left)) {
             return null;
         }
 
@@ -177,10 +177,10 @@ CODE_SAMPLE
         if ($binaryOp instanceof Mul && $this->isValue($binaryOp->left, 1) && $this->isNumberType($binaryOp->right)) {
             return $binaryOp->right;
         }
-        if (!$this->isValue($binaryOp->right, 1)) {
+        if (! $this->isValue($binaryOp->right, 1)) {
             return null;
         }
-        if (!$this->isNumberType($binaryOp->left)) {
+        if (! $this->isNumberType($binaryOp->left)) {
             return null;
         }
 

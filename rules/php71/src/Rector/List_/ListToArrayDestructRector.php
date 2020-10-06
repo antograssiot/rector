@@ -80,7 +80,7 @@ CODE_SAMPLE
         if ($parentNode instanceof Assign && $parentNode->var === $node) {
             return new Array_((array) $node->items);
         }
-        if (!$parentNode instanceof Foreach_) {
+        if (! $parentNode instanceof Foreach_) {
             return null;
         }
         if ($parentNode->valueVar !== $node) {

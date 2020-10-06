@@ -22,7 +22,7 @@ final class ServiceNaming
 
     public function resolvePropertyNameFromServiceType(string $serviceType): string
     {
-        if (!Strings::contains($serviceType, '_')) {
+        if (! Strings::contains($serviceType, '_')) {
             return $this->propertyNaming->fqnToVariableName(new ObjectType($serviceType));
         }
         if (Strings::contains($serviceType, '\\')) {

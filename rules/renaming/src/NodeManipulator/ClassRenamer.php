@@ -323,10 +323,10 @@ final class ClassRenamer
     private function isValidClassNameChange(Node $node, string $newName, Class_ $class): bool
     {
         if ($class->extends !== $node) {
-            return !(in_array($node, $class->implements, true) && class_exists($newName));
+            return ! (in_array($node, $class->implements, true) && class_exists($newName));
         }
-        if (!interface_exists($newName)) {
-            return !(in_array($node, $class->implements, true) && class_exists($newName));
+        if (! interface_exists($newName)) {
+            return ! (in_array($node, $class->implements, true) && class_exists($newName));
         }
         return false;
     }

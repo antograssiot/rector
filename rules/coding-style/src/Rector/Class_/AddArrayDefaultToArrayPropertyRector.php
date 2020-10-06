@@ -247,13 +247,21 @@ CODE_SAMPLE
         if (! $expr instanceof NotIdentical) {
             return false;
         }
-        if (!$this->propertyFetchManipulator->isLocalPropertyOfNames($expr->left, $propertyNames)) {
-            return $this->propertyFetchManipulator->isLocalPropertyOfNames($expr->right, $propertyNames) && $this->isNull($expr->left);
+        if (! $this->propertyFetchManipulator->isLocalPropertyOfNames($expr->left, $propertyNames)) {
+            return $this->propertyFetchManipulator->isLocalPropertyOfNames(
+                $expr->right,
+                $propertyNames
+            ) && $this->isNull(
+                $expr->left
+            );
         }
-        if (!$this->isNull(
-            $expr->right
-        )) {
-            return $this->propertyFetchManipulator->isLocalPropertyOfNames($expr->right, $propertyNames) && $this->isNull($expr->left);
+        if (! $this->isNull($expr->right)) {
+            return $this->propertyFetchManipulator->isLocalPropertyOfNames(
+                $expr->right,
+                $propertyNames
+            ) && $this->isNull(
+                $expr->left
+            );
         }
         return true;
     }

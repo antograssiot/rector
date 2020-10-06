@@ -138,7 +138,7 @@ CODE_SAMPLE
         if ($firstArgumentType !== 'array') {
             return $modalToGetSet->getGetMethod();
         }
-        if (!$argumentValue instanceof Array_) {
+        if (! $argumentValue instanceof Array_) {
             return $modalToGetSet->getGetMethod();
         }
 

@@ -301,10 +301,10 @@ final class TokenManipulator
         if ($identical->left instanceof ArrayDimFetch && $identical->right instanceof ConstFetch) {
             return new ArrayDimFetchAndConstFetch($identical->left, $identical->right);
         }
-        if (!$identical->right instanceof ArrayDimFetch) {
+        if (! $identical->right instanceof ArrayDimFetch) {
             return null;
         }
-        if (!$identical->left instanceof ConstFetch) {
+        if (! $identical->left instanceof ConstFetch) {
             return null;
         }
 

@@ -170,10 +170,10 @@ CODE_SAMPLE
         if (! $this->isName($expr->cond, 'is_array')) {
             return $expr;
         }
-        if (!$expr->if instanceof Variable) {
+        if (! $expr->if instanceof Variable) {
             return $expr;
         }
-        if (!$this->isIteratorToArrayFuncCall($expr->else)) {
+        if (! $this->isIteratorToArrayFuncCall($expr->else)) {
             return $expr;
         }
 

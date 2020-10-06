@@ -64,7 +64,7 @@ CODE_SAMPLE
         if ($this->isStaticType($node->left, BooleanType::class) && ! $this->isBool($node->left)) {
             return $this->processBoolTypeToNotBool($node, $node->left, $node->right);
         }
-        if (!$this->isStaticType($node->right, BooleanType::class)) {
+        if (! $this->isStaticType($node->right, BooleanType::class)) {
             return null;
         }
         if ($this->isBool($node->right)) {

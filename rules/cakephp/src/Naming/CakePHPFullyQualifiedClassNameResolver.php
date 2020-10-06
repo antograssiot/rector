@@ -63,13 +63,10 @@ final class CakePHPFullyQualifiedClassNameResolver
         if (class_exists($cakePhpVersion) || interface_exists($cakePhpVersion)) {
             return $cakePhpVersion;
         }
-        if (!Strings::contains($pseudoNamespace, '\\')) {
+        if (! Strings::contains($pseudoNamespace, '\\')) {
             return $pseudoNamespace . '\\' . $shortClass;
         }
-        if (Strings::match(
-            $pseudoNamespace,
-            self::PLUGIN_OR_LIB_REGEX
-        )) {
+        if (Strings::match($pseudoNamespace, self::PLUGIN_OR_LIB_REGEX)) {
             return $pseudoNamespace . '\\' . $shortClass;
         }
 

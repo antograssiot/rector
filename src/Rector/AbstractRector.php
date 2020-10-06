@@ -233,10 +233,10 @@ abstract class AbstractRector extends NodeVisitorAbstract implements PhpRectorIn
             $this->keepFileInfoAttribute($node, $originalNode);
             $this->notifyNodeFileInfo($node);
         }
-        if (!$originalNode instanceof Stmt) {
+        if (! $originalNode instanceof Stmt) {
             return $node;
         }
-        if (!$node instanceof Expr) {
+        if (! $node instanceof Expr) {
             return $node;
         }
 

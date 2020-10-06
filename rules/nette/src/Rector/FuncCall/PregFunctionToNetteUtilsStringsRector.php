@@ -145,7 +145,7 @@ CODE_SAMPLE
 
             return null;
         }
-        if (!isset($funcCall->args[2])) {
+        if (! isset($funcCall->args[2])) {
             return $matchStaticCall;
         }
         if ($currentFunctionName === 'preg_replace') {

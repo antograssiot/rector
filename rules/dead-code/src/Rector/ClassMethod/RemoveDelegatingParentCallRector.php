@@ -252,7 +252,7 @@ CODE_SAMPLE
             if ($methodName !== MethodName::CONSTRUCT) {
                 return new ReflectionMethod($className, $methodName);
             }
-            if (!class_exists($className)) {
+            if (! class_exists($className)) {
                 return new ReflectionMethod($className, $methodName);
             }
             return null;

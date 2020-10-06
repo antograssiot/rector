@@ -360,10 +360,10 @@ final class NodeTypeResolver
         }
 
         $type = $nodeScope->getType($node);
-        if (!$node instanceof MethodCall) {
+        if (! $node instanceof MethodCall) {
             return $type;
         }
-        if (!$type instanceof MixedType) {
+        if (! $type instanceof MixedType) {
             return $type;
         }
 

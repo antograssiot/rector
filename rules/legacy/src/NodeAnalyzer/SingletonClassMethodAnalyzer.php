@@ -115,10 +115,10 @@ final class SingletonClassMethodAnalyzer
                 return $expr->left;
             }
         }
-        if (!$expr instanceof BooleanNot) {
+        if (! $expr instanceof BooleanNot) {
             return null;
         }
-        if (!$expr->expr instanceof StaticPropertyFetch) {
+        if (! $expr->expr instanceof StaticPropertyFetch) {
             return null;
         }
 

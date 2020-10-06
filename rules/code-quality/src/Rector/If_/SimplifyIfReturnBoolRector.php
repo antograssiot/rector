@@ -144,11 +144,11 @@ CODE_SAMPLE
         if (! $nextNode instanceof Return_ || $nextNode->expr === null) {
             return true;
         }
-        if (!$this->isFalse($returnedExpr)) {
-            return !$this->isBool($nextNode->expr);
+        if (! $this->isFalse($returnedExpr)) {
+            return ! $this->isBool($nextNode->expr);
         }
-        if (!Strings::contains($this->print($if->cond), '!=')) {
-            return !$this->isBool($nextNode->expr);
+        if (! Strings::contains($this->print($if->cond), '!=')) {
+            return ! $this->isBool($nextNode->expr);
         }
 
         return true;

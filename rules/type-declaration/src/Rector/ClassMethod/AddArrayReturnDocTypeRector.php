@@ -156,10 +156,10 @@ CODE_SAMPLE
         }
 
         $currentPhpDocReturnType = $this->getNodeReturnPhpDocType($classMethod);
-        if (!$currentPhpDocReturnType instanceof ArrayType) {
+        if (! $currentPhpDocReturnType instanceof ArrayType) {
             return $currentPhpDocReturnType instanceof IterableType;
         }
-        if (!$currentPhpDocReturnType->getItemType() instanceof MixedType) {
+        if (! $currentPhpDocReturnType->getItemType() instanceof MixedType) {
             return $currentPhpDocReturnType instanceof IterableType;
         }
 

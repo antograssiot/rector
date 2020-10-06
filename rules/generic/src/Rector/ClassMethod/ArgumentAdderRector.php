@@ -211,13 +211,13 @@ CODE_SAMPLE
             // already added?
             return isset($node->params[$position]) && $this->isName($node->params[$position], $argumentName);
         }
-        if (!isset($node->args[$position])) {
+        if (! isset($node->args[$position])) {
             // is correct scope?
-            return !$this->isInCorrectScope($node, $argumentAdder);
+            return ! $this->isInCorrectScope($node, $argumentAdder);
         }
-        if (!$this->isName($node->args[$position], $argumentName)) {
+        if (! $this->isName($node->args[$position], $argumentName)) {
             // is correct scope?
-            return !$this->isInCorrectScope($node, $argumentAdder);
+            return ! $this->isInCorrectScope($node, $argumentAdder);
         }
 
         // is correct scope?
