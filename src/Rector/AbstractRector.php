@@ -233,13 +233,14 @@ abstract class AbstractRector extends NodeVisitorAbstract implements PhpRectorIn
             $this->keepFileInfoAttribute($node, $originalNode);
             $this->notifyNodeFileInfo($node);
         }
-
-        // if stmt ("$value;") was replaced by expr ("$value"), add the ending ";" (Expression) to prevent breaking the code
-        if ($originalNode instanceof Stmt && $node instanceof Expr) {
-            return new Expression($node);
+        if (!$originalNode instanceof Stmt) {
+            return $node;
+        }
+        if (!$node instanceof Expr) {
+            return $node;
         }
 
-        return $node;
+        return new Expression($node);
     }
 
     protected function getNextExpression(Node $node): ?Node

@@ -135,11 +135,13 @@ CODE_SAMPLE
 
         $firstArgumentType = $modalToGetSet->getFirstArgumentType();
         $argumentValue = $methodCall->args[0]->value;
-
-        if ($firstArgumentType === 'array' && $argumentValue instanceof Array_) {
-            return $modalToGetSet->getSetMethod();
+        if ($firstArgumentType !== 'array') {
+            return $modalToGetSet->getGetMethod();
+        }
+        if (!$argumentValue instanceof Array_) {
+            return $modalToGetSet->getGetMethod();
         }
 
-        return $modalToGetSet->getGetMethod();
+        return $modalToGetSet->getSetMethod();
     }
 }

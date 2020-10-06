@@ -65,13 +65,13 @@ abstract class AbstractFormAddRector extends AbstractRector
     protected function isCollectionType(MethodCall $methodCall): bool
     {
         $typeValue = $methodCall->args[1]->value;
-
-        if ($typeValue instanceof ClassConstFetch
-            && $this->isName($typeValue->class, 'Symfony\Component\Form\Extension\Core\Type\CollectionType')
-        ) {
-            return true;
+        if (!$typeValue instanceof ClassConstFetch) {
+            return $this->isValue($typeValue, 'collection');
+        }
+        if (!$this->isName($typeValue->class, 'Symfony\Component\Form\Extension\Core\Type\CollectionType')) {
+            return $this->isValue($typeValue, 'collection');
         }
 
-        return $this->isValue($typeValue, 'collection');
+        return true;
     }
 }

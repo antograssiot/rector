@@ -64,12 +64,14 @@ CODE_SAMPLE
         if ($this->isStaticType($node->left, BooleanType::class) && ! $this->isBool($node->left)) {
             return $this->processBoolTypeToNotBool($node, $node->left, $node->right);
         }
-
-        if ($this->isStaticType($node->right, BooleanType::class) && ! $this->isBool($node->right)) {
-            return $this->processBoolTypeToNotBool($node, $node->right, $node->left);
+        if (!$this->isStaticType($node->right, BooleanType::class)) {
+            return null;
+        }
+        if ($this->isBool($node->right)) {
+            return null;
         }
 
-        return null;
+        return $this->processBoolTypeToNotBool($node, $node->right, $node->left);
     }
 
     private function processBoolTypeToNotBool(Node $node, Expr $leftExpr, Expr $rightExpr): ?Expr

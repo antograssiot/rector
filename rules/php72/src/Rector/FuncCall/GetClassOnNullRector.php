@@ -133,15 +133,15 @@ CODE_SAMPLE
         if (! $ternary->cond instanceof Identical) {
             return false;
         }
-
-        if ($this->areNodesEqual($ternary->cond->left, $funcCall->args[0]->value) && ! $this->isNull(
+        if (!$this->areNodesEqual($ternary->cond->left, $funcCall->args[0]->value)) {
+            return $this->areNodesEqual($ternary->cond->right, $funcCall->args[0]->value) && !$this->isNull($ternary->cond->left);
+        }
+        if ($this->isNull(
             $ternary->cond->right
         )) {
-            return true;
+            return $this->areNodesEqual($ternary->cond->right, $funcCall->args[0]->value) && !$this->isNull($ternary->cond->left);
         }
-        return $this->areNodesEqual($ternary->cond->right, $funcCall->args[0]->value) && ! $this->isNull(
-            $ternary->cond->left
-        );
+        return true;
     }
 
     /**
@@ -152,14 +152,14 @@ CODE_SAMPLE
         if (! $ternary->cond instanceof NotIdentical) {
             return false;
         }
-
-        if ($this->areNodesEqual($ternary->cond->left, $funcCall->args[0]->value) && $this->isNull(
+        if (!$this->areNodesEqual($ternary->cond->left, $funcCall->args[0]->value)) {
+            return $this->areNodesEqual($ternary->cond->right, $funcCall->args[0]->value) && $this->isNull($ternary->cond->left);
+        }
+        if (!$this->isNull(
             $ternary->cond->right
         )) {
-            return true;
+            return $this->areNodesEqual($ternary->cond->right, $funcCall->args[0]->value) && $this->isNull($ternary->cond->left);
         }
-        return $this->areNodesEqual($ternary->cond->right, $funcCall->args[0]->value) && $this->isNull(
-            $ternary->cond->left
-        );
+        return true;
     }
 }

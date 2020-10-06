@@ -174,17 +174,16 @@ CODE_SAMPLE
         if ($firstValue === null || $secondValue === null) {
             return false;
         }
-
-        if ($this->areNodesEqual($binaryOp->left, $firstValue) && $this->areNodesEqual(
+        if (!$this->areNodesEqual($binaryOp->left, $firstValue)) {
+            return $this->areNodesEqual($binaryOp->right, $firstValue) && $this->areNodesEqual($binaryOp->left, $secondValue);
+        }
+        if (!$this->areNodesEqual(
             $binaryOp->right,
             $secondValue
         )) {
-            return true;
+            return $this->areNodesEqual($binaryOp->right, $firstValue) && $this->areNodesEqual($binaryOp->left, $secondValue);
         }
-        return $this->areNodesEqual($binaryOp->right, $firstValue) && $this->areNodesEqual(
-            $binaryOp->left,
-            $secondValue
-        );
+        return true;
     }
 
     private function matchOnEqual(If_ $if): void

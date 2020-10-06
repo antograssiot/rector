@@ -173,15 +173,16 @@ abstract class AbstractTagValueNode implements AttributeAwareNodeInterface, PhpD
 
     private function shouldPrintEmptyBrackets(): bool
     {
-        // @todo decouple
-        if ($this->tagValueNodeConfiguration->getOriginalContent() !== null && Strings::endsWith(
+        if ($this->tagValueNodeConfiguration->getOriginalContent() === null) {
+            return $this->tagValueNodeConfiguration->hasOpeningBracket() && $this->tagValueNodeConfiguration->hasClosingBracket();
+        }
+        if (!Strings::endsWith(
             $this->tagValueNodeConfiguration->getOriginalContent(),
             '()'
         )) {
-            return true;
+            return $this->tagValueNodeConfiguration->hasOpeningBracket() && $this->tagValueNodeConfiguration->hasClosingBracket();
         }
-
-        return $this->tagValueNodeConfiguration->hasOpeningBracket() && $this->tagValueNodeConfiguration->hasClosingBracket();
+        return true;
     }
 
     private function correctArraySingleItemPrint(array $value, string $arrayItemAsString): string

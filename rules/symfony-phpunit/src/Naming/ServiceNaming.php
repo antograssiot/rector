@@ -22,10 +22,12 @@ final class ServiceNaming
 
     public function resolvePropertyNameFromServiceType(string $serviceType): string
     {
-        if (Strings::contains($serviceType, '_') && ! Strings::contains($serviceType, '\\')) {
-            return $this->propertyNaming->underscoreToName($serviceType);
+        if (!Strings::contains($serviceType, '_')) {
+            return $this->propertyNaming->fqnToVariableName(new ObjectType($serviceType));
         }
-
-        return $this->propertyNaming->fqnToVariableName(new ObjectType($serviceType));
+        if (Strings::contains($serviceType, '\\')) {
+            return $this->propertyNaming->fqnToVariableName(new ObjectType($serviceType));
+        }
+        return $this->propertyNaming->underscoreToName($serviceType);
     }
 }

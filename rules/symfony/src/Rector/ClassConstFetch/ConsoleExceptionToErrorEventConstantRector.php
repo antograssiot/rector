@@ -55,11 +55,13 @@ final class ConsoleExceptionToErrorEventConstantRector extends AbstractRector
         ) {
             return $this->createClassConstFetch(self::CONSOLE_EVENTS_CLASS, 'ERROR');
         }
-
-        if ($node instanceof String_ && $node->value === 'console.exception') {
-            return $this->createClassConstFetch(self::CONSOLE_EVENTS_CLASS, 'ERROR');
+        if (!$node instanceof String_) {
+            return null;
+        }
+        if ($node->value !== 'console.exception') {
+            return null;
         }
 
-        return null;
+        return $this->createClassConstFetch(self::CONSOLE_EVENTS_CLASS, 'ERROR');
     }
 }

@@ -66,10 +66,12 @@ final class PhpParserTypeAnalyzer
 
     private function isTraversableOrIterableSubtype(string $possibleSubtype, string $possibleParentType): bool
     {
-        if (in_array($possibleSubtype, ['array', 'Traversable'], true) && $possibleParentType === 'iterable') {
-            return true;
+        if (!in_array($possibleSubtype, ['array', 'Traversable'], true)) {
+            return in_array($possibleSubtype, ['array', 'ArrayIterator'], true) && $possibleParentType === 'countable';
         }
-
-        return in_array($possibleSubtype, ['array', 'ArrayIterator'], true) && $possibleParentType === 'countable';
+        if ($possibleParentType !== 'iterable') {
+            return in_array($possibleSubtype, ['array', 'ArrayIterator'], true) && $possibleParentType === 'countable';
+        }
+        return true;
     }
 }

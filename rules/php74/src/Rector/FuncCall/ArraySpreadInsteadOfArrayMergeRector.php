@@ -170,12 +170,14 @@ CODE_SAMPLE
         if (! $this->isName($expr->cond, 'is_array')) {
             return $expr;
         }
-
-        if ($expr->if instanceof Variable && $this->isIteratorToArrayFuncCall($expr->else)) {
-            return $expr->if;
+        if (!$expr->if instanceof Variable) {
+            return $expr;
+        }
+        if (!$this->isIteratorToArrayFuncCall($expr->else)) {
+            return $expr;
         }
 
-        return $expr;
+        return $expr->if;
     }
 
     private function createUnpackedArrayItem(Expr $expr): ArrayItem

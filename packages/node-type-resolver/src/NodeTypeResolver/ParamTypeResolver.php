@@ -91,11 +91,13 @@ final class ParamTypeResolver implements NodeTypeResolverInterface
 
     private function resolveFromType(Node $node): Type
     {
-        if ($node->type !== null && ! $node->type instanceof Identifier) {
-            return $this->staticTypeMapper->mapPhpParserNodePHPStanType($node->type);
+        if ($node->type === null) {
+            return new MixedType();
         }
-
-        return new MixedType();
+        if ($node->type instanceof Identifier) {
+            return new MixedType();
+        }
+        return $this->staticTypeMapper->mapPhpParserNodePHPStanType($node->type);
     }
 
     private function resolveFromFirstVariableUse(Param $param): Type

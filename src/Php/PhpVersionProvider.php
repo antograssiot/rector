@@ -65,12 +65,13 @@ final class PhpVersionProvider
 
         $projectComposerContent = $this->smartFileSystem->readFile($projectComposerJson);
         $projectComposerJson = Json::decode($projectComposerContent, Json::FORCE_ARRAY);
-
-        // Rector's composer.json
-        if (isset($projectComposerJson['name']) && $projectComposerJson['name'] === 'rector/rector') {
-            return null;
+        if (!isset($projectComposerJson['name'])) {
+            return $projectComposerJson['config']['platform']['php'] ?? null;
+        }
+        if ($projectComposerJson['name'] !== 'rector/rector') {
+            return $projectComposerJson['config']['platform']['php'] ?? null;
         }
 
-        return $projectComposerJson['config']['platform']['php'] ?? null;
+        return null;
     }
 }

@@ -145,13 +145,14 @@ CODE_SAMPLE
 
             return null;
         }
-
-        // assign
-        if (isset($funcCall->args[2]) && $currentFunctionName !== 'preg_replace') {
-            return new Assign($funcCall->args[2]->value, $matchStaticCall);
+        if (!isset($funcCall->args[2])) {
+            return $matchStaticCall;
+        }
+        if ($currentFunctionName === 'preg_replace') {
+            return $matchStaticCall;
         }
 
-        return $matchStaticCall;
+        return new Assign($funcCall->args[2]->value, $matchStaticCall);
     }
 
     private function createMatchStaticCall(FuncCall $funcCall, string $methodName): StaticCall

@@ -47,10 +47,12 @@ final class ParsedNodesByTypeReturnTypeExtension implements DynamicMethodReturnT
 
     private function resolveArgumentValue(Expr $expr): ?string
     {
-        if ($expr instanceof ClassConstFetch && $expr->class instanceof Name) {
-            return $expr->class->toString();
+        if (!$expr instanceof ClassConstFetch) {
+            return null;
         }
-
-        return null;
+        if (!$expr->class instanceof Name) {
+            return null;
+        }
+        return $expr->class->toString();
     }
 }

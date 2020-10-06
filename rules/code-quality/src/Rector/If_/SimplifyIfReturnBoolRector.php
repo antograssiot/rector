@@ -144,13 +144,14 @@ CODE_SAMPLE
         if (! $nextNode instanceof Return_ || $nextNode->expr === null) {
             return true;
         }
-
-        // negate + negate → skip for now
-        if ($this->isFalse($returnedExpr) && Strings::contains($this->print($if->cond), '!=')) {
-            return true;
+        if (!$this->isFalse($returnedExpr)) {
+            return !$this->isBool($nextNode->expr);
+        }
+        if (!Strings::contains($this->print($if->cond), '!=')) {
+            return !$this->isBool($nextNode->expr);
         }
 
-        return ! $this->isBool($nextNode->expr);
+        return true;
     }
 
     private function processReturnTrue(If_ $if, Return_ $nextReturnNode): Return_

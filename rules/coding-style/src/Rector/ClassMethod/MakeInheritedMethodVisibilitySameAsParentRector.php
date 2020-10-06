@@ -120,11 +120,13 @@ CODE_SAMPLE
         if ($reflectionMethod->isPublic() && $classMethod->isPublic()) {
             return true;
         }
-
-        if ($reflectionMethod->isProtected() && $classMethod->isProtected()) {
-            return true;
+        if (!$reflectionMethod->isProtected()) {
+            return $reflectionMethod->isPrivate() && $classMethod->isPrivate();
         }
-        return $reflectionMethod->isPrivate() && $classMethod->isPrivate();
+        if (!$classMethod->isProtected()) {
+            return $reflectionMethod->isPrivate() && $classMethod->isPrivate();
+        }
+        return true;
     }
 
     /**

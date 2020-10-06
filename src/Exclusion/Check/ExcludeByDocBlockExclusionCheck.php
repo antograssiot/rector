@@ -40,11 +40,14 @@ final class ExcludeByDocBlockExclusionCheck implements ExclusionCheckInterface
 
         // recurse up until a Stmt node is found since it might contain a noRector
         $parentNode = $node->getAttribute(AttributeKey::PARENT_NODE);
-        if (! $node instanceof Stmt && $parentNode !== null) {
-            return $this->isNodeSkippedByRector($phpRector, $parentNode);
+        if ($node instanceof Stmt) {
+            return false;
+        }
+        if ($parentNode === null) {
+            return false;
         }
 
-        return false;
+        return $this->isNodeSkippedByRector($phpRector, $parentNode);
     }
 
     private function hasNoRectorComment(PhpRectorInterface $phpRector, Doc $doc): bool

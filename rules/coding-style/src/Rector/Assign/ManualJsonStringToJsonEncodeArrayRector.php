@@ -367,10 +367,13 @@ CODE_SAMPLE
         }
 
         $firstArgumentValue = $node->args[0]->value;
-        if ($firstArgumentValue instanceof String_ && $firstArgumentValue->value !== '","') {
-            return false;
+        if (!$firstArgumentValue instanceof String_) {
+            return true;
+        }
+        if ($firstArgumentValue->value === '","') {
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

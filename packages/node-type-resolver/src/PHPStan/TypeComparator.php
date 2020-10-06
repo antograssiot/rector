@@ -63,11 +63,13 @@ final class TypeComparator
         if ($firstType instanceof IntegerType && $secondType instanceof IntegerType) {
             return true;
         }
-
-        if ($firstType instanceof FloatType && $secondType instanceof FloatType) {
-            return true;
+        if (!$firstType instanceof FloatType) {
+            return $firstType instanceof BooleanType && $secondType instanceof BooleanType;
         }
-        return $firstType instanceof BooleanType && $secondType instanceof BooleanType;
+        if (!$secondType instanceof FloatType) {
+            return $firstType instanceof BooleanType && $secondType instanceof BooleanType;
+        }
+        return true;
     }
 
     private function areAliasedObjectMatchingFqnObject(Type $firstType, Type $secondType): bool

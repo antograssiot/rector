@@ -249,13 +249,15 @@ CODE_SAMPLE
     private function getReflectionMethod(string $className, string $methodName): ?ReflectionMethod
     {
         if (! method_exists($className, $methodName)) {
-            //internal classes don't have __construct method
-            if ($methodName === MethodName::CONSTRUCT && class_exists($className)) {
-                return (new ReflectionClass($className))->getConstructor();
+            if ($methodName !== MethodName::CONSTRUCT) {
+                return new ReflectionMethod($className, $methodName);
+            }
+            if (!class_exists($className)) {
+                return new ReflectionMethod($className, $methodName);
             }
             return null;
         }
-        return new ReflectionMethod($className, $methodName);
+        return (new ReflectionClass($className))->getConstructor();
     }
 
     private function areParameterDefaultsDifferent(

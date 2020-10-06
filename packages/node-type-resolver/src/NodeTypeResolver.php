@@ -360,13 +360,14 @@ final class NodeTypeResolver
         }
 
         $type = $nodeScope->getType($node);
-
-        // hot fix for phpstan not resolving chain method calls
-        if ($node instanceof MethodCall && $type instanceof MixedType) {
-            return $this->resolveFirstType($node->var);
+        if (!$node instanceof MethodCall) {
+            return $type;
+        }
+        if (!$type instanceof MixedType) {
+            return $type;
         }
 
-        return $type;
+        return $this->resolveFirstType($node->var);
     }
 
     private function isArrayExpr(Node $node): bool

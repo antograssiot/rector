@@ -182,11 +182,14 @@ final class NameImporter
     private function isFunctionOrConstantImportWithSingleName(Name $name): bool
     {
         $parentNode = $name->getAttribute(AttributeKey::PARENT_NODE);
-        if (! $parentNode instanceof ConstFetch && ! $parentNode instanceof FuncCall) {
-            return false;
+        if ($parentNode instanceof ConstFetch) {
+            return count($name->parts) === 1;
+        }
+        if ($parentNode instanceof FuncCall) {
+            return count($name->parts) === 1;
         }
 
-        return count($name->parts) === 1;
+        return false;
     }
 
     private function isNonExistingClassLikeAndFunctionFullyQualifiedName(Name $name): bool
